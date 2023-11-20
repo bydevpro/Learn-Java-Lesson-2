@@ -15,19 +15,32 @@ public class GuessingGame extends JFrame {
 	private JLabel lblOutput;
 	private int theNumber;
 	private int tips;
-
+	JButton btnPlayAgain = new JButton("Еще раз?");
+    
 	public void checkGuess() {
+		btnPlayAgain.addActionListener(new ActionListener() {
+	           public void actionPerformed(ActionEvent e) {
+	               newGame();
+	               btnPlayAgain.setVisible(false);
+	               lblOutput.setText("Введите число и нажмите кнопку Угадать!");
+	           }
+	       });
+	       btnPlayAgain.setBounds(174, 134, 110, 23);
+	       getContentPane().add(btnPlayAgain);
+	       btnPlayAgain.setVisible(false);
 		String guessText = textGuess.getText();
 		String message = "";
+		
 		try {
 			int guess = Integer.parseInt(guessText);
 			tips++;
 			if (guess < theNumber) {
-				message = guess + " меншье загаданного числа. Поробуй еще раз!";
+				message = guess + " меньше загаданного числа. Поробуй еще раз!";
 			} else if (guess > theNumber) {
 				message = guess + " больше загаданного числа. Попробуй еще раз!";
 			} else {
 				message = "Верно это " + guess + "!! \nПоздравляю! Вы угадали с " + tips + " попыток!";
+				btnPlayAgain.setVisible(true);
 			}
 		} catch (Exception e) {
 			message = "Пожалуйста введите только целое число от 1 до 100.";
@@ -37,6 +50,7 @@ public class GuessingGame extends JFrame {
 			textGuess.selectAll();
 		}
 	}
+	
 
 	public void newGame() {
 		theNumber = (int) (Math.random() * 100 + 1);
@@ -82,6 +96,8 @@ public class GuessingGame extends JFrame {
 		lblOutput.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOutput.setBounds(10, 220, 416, 43);
 		getContentPane().add(lblOutput);
+		
+		
 	}
 
 	public static void main(String[] args) {
