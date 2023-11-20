@@ -14,18 +14,20 @@ public class GuessingGame extends JFrame {
 	private JTextField textGuess;
 	private JLabel lblOutput;
 	private int theNumber;
+	private int tips;
 
 	public void checkGuess() {
 		String guessText = textGuess.getText();
 		String message = "";
 		try {
 			int guess = Integer.parseInt(guessText);
+			tips++;
 			if (guess < theNumber) {
 				message = guess + " меншье загаданного числа. Поробуй еще раз!";
 			} else if (guess > theNumber) {
 				message = guess + " больше загаданного числа. Попробуй еще раз!";
 			} else {
-				message = "Верно это " + guess + "!! Поздравляю! Вы угадали!";
+				message = "Верно это " + guess + "!! \nПоздравляю! Вы угадали с " + tips + " попыток!";
 			}
 		} catch (Exception e) {
 			message = "Пожалуйста введите только целое число от 1 до 100.";
@@ -78,7 +80,7 @@ public class GuessingGame extends JFrame {
 
 		lblOutput = new JLabel("Введите число и нажмите кнопку Угадать!");
 		lblOutput.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOutput.setBounds(101, 220, 268, 20);
+		lblOutput.setBounds(10, 220, 416, 43);
 		getContentPane().add(lblOutput);
 	}
 
